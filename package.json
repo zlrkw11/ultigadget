@@ -2,10 +2,14 @@
   "name": "ultigadget",
   "version": "1.0.0",
   "description": "Ray & Nate ",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "author": "Nate Williamson, Ray Zhao",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.1.0"
+  }
 }
