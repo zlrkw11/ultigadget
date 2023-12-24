@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# electron-vite-react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite)
+![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470)
+![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d)
+![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron)
+[![Required Node.JS >= 14.18.0 || >=16.0.0](https://img.shields.io/static/v1?label=node&message=14.18.0%20||%20%3E=16.0.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
 
-## Available Scripts
+English | [简体中文](README.zh-CN.md)
 
-In the project directory, you can run:
+## 👀 Overview
 
-### `npm start`
+📦 Ready out of the box  
+🎯 Based on the official [template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts), project structure will be familiar to you  
+🌱 Easily extendable and customizable  
+💪 Supports Node.js API in the renderer process  
+🔩 Supports C/C++ native addons  
+🐞 Debugger configuration included  
+🖥 Easy to implement multiple windows  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛫 Quick Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+# clone the project
+git clone https://github.com/electron-vite/electron-vite-react.git
 
-### `npm test`
+# enter the project directory
+cd electron-vite-react
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# install dependency
+npm install
 
-### `npm run build`
+# develop
+npm run dev
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🐞 Debug
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![electron-vite-react-debug.gif](/electron-vite-react-debug.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📂 Directory structure
 
-### `npm run eject`
+Familiar React application structure, just with `electron` folder on the top :wink:  
+*Files in this folder will be separated from your React application and built into `dist-electron`*  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```tree
+├── electron                                 Electron-related code
+│   ├── main                                 Main-process source code
+│   └── preload                              Preload-scripts source code
+│
+├── release                                  Generated after production build, contains executables
+│   └── {version}
+│       ├── {os}-{os_arch}                   Contains unpacked application executable
+│       └── {app_name}_{version}.{ext}       Installer for the application
+│
+├── public                                   Static assets
+└── src                                      Renderer source code, your React application
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!--
+## 🚨 Be aware
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This template integrates Node.js API to the renderer process by default. If you want to follow **Electron Security Concerns** you might want to disable this feature. You will have to expose needed API by yourself.  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To get started, remove the option as shown below. This will [modify the Vite configuration and disable this feature](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
 
-## Learn More
+```diff
+# vite.config.ts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+export default {
+  plugins: [
+    ...
+-   // Use Node.js API in the Renderer-process
+-   renderer({
+-     nodeIntegration: true,
+-   }),
+    ...
+  ],
+}
+```
+-->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔧 Additional features
 
-### Code Splitting
+1. electron-updater 👉 [see docs](src/components/update/README.md)
+1. playwright
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## ❔ FAQ
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
+- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
