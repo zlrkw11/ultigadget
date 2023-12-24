@@ -1,6 +1,7 @@
-function Button(){
 
-    return <button>NATE</button>
+function Button(props){
+
+    return <button className='tool-button'>{props.name}</button>
 }
 
 export default Button;

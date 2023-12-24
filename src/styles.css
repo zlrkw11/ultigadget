@@ -1,0 +1,16 @@
+/*Button styling*/
+.tool-button {
+    float: left;
+    border: 1px solid grey;
+    width: 100px;
+    height: 80px;
+}
+
+.tool-button:hover{
+    background-color: #a9abaa;
+    border-color: black;
+}
+
+body{
+    padding: 0%;
+}
